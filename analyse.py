@@ -78,7 +78,7 @@ def analyse_all():
 	h=open('allHeads.txt','r')
 	heads=h.read()
 	#print(heads)
-	heads=heads.split('\n')
+	heads=heads.split('\t')
 	#print(heads)
 	for i in range(0,txtCounter):
 		analyse_article('news'+str(i)+'.txt',heads[i])

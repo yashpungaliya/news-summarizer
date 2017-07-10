@@ -10,6 +10,12 @@ def get_current_html(url):
 	data=r.decode("utf-8")
 	soup=BeautifulSoup(data,'html.parser')
 	article_heading=soup.find_all("h1",itemprop="headline")
+	dateline=""
+	dateline=soup.find("div",{"class":"ins_dateline"})
+	if dateline is not None:
+		dateline=dateline.text
+		dateline=dateline.replace(":","-")
+		print(dateline)
 	head=article_heading[0].text.strip(' \t\n\r')
 	head = head.replace(u"\u00A0", " ")
 	head=head.replace(","," ")
@@ -49,7 +55,7 @@ def get_current_html(url):
 		#body = body.replace(","," ")
 		#body = body.replace("%","pc")
 		body = re.sub( '\s+', ' ', body ).strip()
-	data={"head":head,"summary":summary,"body":body}
+	data={"head":head,"summary":summary,"body":body,"dateline":dateline}
 	json_data = json.dumps(data)
 	f.write(json_data+';')
 
@@ -95,7 +101,7 @@ def head_list():
 				print("File:"+k)		
 				newsFile= open("news"+k+".txt","w+")
 				newsFile.write(art)
-				string+=json.loads(i)['head']+'\n'
+				string+=json.loads(i)['head']+'\n'+json.loads(i)['dateline']+'\t'
 				j=j+1
 		except:
 			print("Caught some error")	
