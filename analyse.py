@@ -9,6 +9,7 @@ import glob
 
 def analyse_article(filename,headline):
 	f=open(filename,'r')
+	afile=open("THEfile.html",'a')
 	r=f.read()
 	all_tokens_stemmed=[]
 	all_bigrams=[]
@@ -49,7 +50,7 @@ def analyse_article(filename,headline):
 	dictionary=dict(zip(all_sent,sent_freq))
 	#print(dictionary)
 	sorted_dict=sorted(dictionary.items(), key=lambda x: x[1],reverse=True)
-	j=5
+	j=4
 	top_news=""
 	for x in sorted_dict:
 		top_news+=x[0]+'.'+'\n'
@@ -68,15 +69,39 @@ def analyse_article(filename,headline):
 	#print(all_bigrams)
 	#print(freq2.most_common(10))
 	f.close()
-	f=open('analysed_'+filename,'w')
-	f.write("Headline : "+headline+"\n...........................................................................\n"+top_news)
+	f=open('analysed_'+filename[:-3]+'html','w')
+
+	style="<style type='text/css'>#block{margin: 20px;display: inline-block;	border-style: groove;border-radius: 5px;width: 35em;box-shadow: 10px 10px 5px #888888;} #header{background: lightblue;padding: 15px;font-size:1.15em;font-family: 'roboto';} #article{background: lightyellow;padding: 9px;	font-size:1em;border-style: groove;}</style>"
+
+	f.write(style+
+	"<div id='block'>"+
+	"<div id='header'>"+
+		headline+
+	"</div>"+
+	"<div id='article'>"+
+		 top_news+ 
+	"</div>"+	
+	"</div>")
+	
+	afile.write("<div id='block'>"+
+	"<div id='header'>"+
+		headline+
+	"</div>"+
+	"<div id='article'>"+
+		 top_news+ 
+	"</div>"+	
+	"</div>")
 	f.close()
+	afile.close()
 
 def analyse_all():
 	txtCounter = len(glob.glob1('/home/yash/Summer Projects/news-crawler',"*.txt"))
 	txtCounter-=2
 	h=open('allHeads.txt','r')
 	heads=h.read()
+	afile=open("THEfile.html",'w')
+	afile.write("<style type='text/css'>body{background: #100a0a;} #block{margin: 20px;display: inline-block;	border-style: groove;border-radius: 5px;width: 35em;box-shadow: 10px 7px 9px #204f4a;} #header{background: lightblue;padding: 15px;font-size:1.15em;font-family: 'roboto';} #article{background: lightyellow;padding: 9px;	font-size:1em;border-style: groove;}</style><body>")
+	afile.close()
 	#print(heads)
 	heads=heads.split('\t')
 	#print(heads)

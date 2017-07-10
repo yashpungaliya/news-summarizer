@@ -15,7 +15,6 @@ def get_current_html(url):
 	if dateline is not None:
 		dateline=dateline.text
 		dateline=dateline.replace(":","-")
-		print(dateline)
 	head=article_heading[0].text.strip(' \t\n\r')
 	head = head.replace(u"\u00A0", " ")
 	head=head.replace(","," ")
@@ -24,6 +23,7 @@ def get_current_html(url):
 	head=head.replace(":"," ")
 	head=head.replace(";"," ")
 	head=head.replace("%","pc")
+	head=head.replace("Mr.","Mr")
 	head = head.replace(":", " ")
 	head=re.sub( '\s+', ' ', head ).strip()
 	small_descript=""
@@ -37,6 +37,9 @@ def get_current_html(url):
 		summary = summary.replace("'", "")
 		summary = summary.replace(",", " ")
 		summary = summary.replace(";", " ")
+		summary.replace("Mr.","Mr")
+		summary.replace("Ms.","Ms")
+		summary.replace("Mrs.","Mrs")
 		summary = summary.replace("%", "pc")
 		summary=re.sub( '\s+', ' ', summary ).strip()
 	large_descript=""
@@ -50,6 +53,9 @@ def get_current_html(url):
 		#body = body.replace("'", "")
 		#body = body.replace("-", " ")
 		body = body.replace(":", " ")
+		body = body.replace("Mr.", "Mr")
+		body = body.replace("Mrs.", "Mrs")
+		body = body.replace("Ms.", "Ms")
 		body = body.replace("Highlights", " ")
 		body = body.replace(";", " ")
 		#body = body.replace(","," ")
@@ -101,10 +107,10 @@ def head_list():
 				print("File:"+k)		
 				newsFile= open("news"+k+".txt","w+")
 				newsFile.write(art)
-				string+=json.loads(i)['head']+'\n'+json.loads(i)['dateline']+'\t'
+				string+=json.loads(i)['head']+'--\n'+json.loads(i)['dateline']+'\t'
 				j=j+1
 		except:
-			print("Caught some error")	
+			print("Found All Links")	
 		finally:
 			#print("done")		
 			f.close()		
