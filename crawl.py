@@ -81,6 +81,7 @@ def crawl_from_home():
 			end=m.end()-2
 			link=l[:end]
 			links.append(link)
+	print(links)			
 	links=links[:-11]
 	i=100	
 	for l in links:

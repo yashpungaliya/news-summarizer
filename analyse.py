@@ -7,14 +7,17 @@ from nltk.corpus import stopwords
 import glob
 
 
-def analyse_article(filename,headline):
-	f=open(filename,'r')
+def analyse_article(i,headline):
+	f=open('newsData.txt','r')
 	afile=open("THEfile.html",'a')
 	r=f.read()
-	if len(r)>12000:
-		return
-	all_tokens_stemmed=[]
-	all_bigrams=[]
+	r=r.split(';')
+	r=r[i]
+	print(r)
+	# if len(r)>12000:
+	# 	return
+	# all_tokens_stemmed=[]
+	# all_bigrams=[]
 	al_tokens=[]
 	wo_sw=[]
 	#stemmer=PorterStemmer()
@@ -38,8 +41,8 @@ def analyse_article(filename,headline):
 		#stemmed_token=stemmer.stem(token.lower())
 		#all_tokens_stemmed.append(stemmed_token)
 		wo_sw.append(token)
-		bigrams=list(ngrams(all_tokens,5))
-		all_bigrams=all_bigrams+bigrams
+		# bigrams=list(ngrams(all_tokens,5))
+		# all_bigrams=all_bigrams+bigrams
 
 	freq_wo_sw=Counter(wo_sw)
 	i=0
@@ -71,7 +74,7 @@ def analyse_article(filename,headline):
 	#print(all_bigrams)
 	#print(freq2.most_common(10))
 	f.close()
-	f=open('analysed_'+filename[:-3]+'html','w')
+	f=open('analysed_.html','a')
 
 	style="<style type='text/css'>#block{margin: 20px;display: inline-block;	border-style: groove;border-radius: 5px;width: 35em;box-shadow: 10px 10px 5px #888888;} #header{background: lightblue;padding: 15px;font-size:1.15em;font-family: 'roboto';} #article{background: lightyellow;padding: 9px;	font-size:1em;border-style: groove;}</style>"
 
@@ -97,8 +100,8 @@ def analyse_article(filename,headline):
 	afile.close()
 
 def analyse_all():
-	txtCounter = len(glob.glob1('/home/yash/Summer Projects/news-crawler',"*.txt"))
-	txtCounter-=2
+	# txtCounter = len(glob.glob1('/home/yash/Summer Projects/news-crawler',"*.txt"))
+	# txtCounter-=2
 	h=open('allHeads.txt','r')
 	heads=h.read()
 	afile=open("THEfile.html",'w')
@@ -107,7 +110,7 @@ def analyse_all():
 	#print(heads)
 	heads=heads.split('\t')
 	#print(heads)
-	for i in range(0,txtCounter):
+	for i in range(0,30):
 		print("Summarizing article-"+str(i))
-		analyse_article('news'+str(i)+'.txt',heads[i])
+		analyse_article(i,heads[i])
 		

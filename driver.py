@@ -5,7 +5,7 @@ print("Fetching Articles...")
 crawl.main()
 print("......................\nAnalysing them...")
 print("Generating a Summary...")
-import analyseMat
-analyseMat.analyse_all()
+import analyse
+analyse.analyse_all()
 
 print("Done!")
