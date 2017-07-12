@@ -9,7 +9,7 @@ import glob
 
 def analyse_article(filename,headline):
 	f=open(filename,'r')
-	afile=open("THEfile.html",'a')
+	afile=open("Material.html",'a')
 	r=f.read()
 	if len(r)>12000:
 		return
@@ -50,7 +50,6 @@ def analyse_article(filename,headline):
 		i=i+1	
 
 	dictionary=dict(zip(all_sent,sent_freq))
-	#print(dictionary)
 	sorted_dict=sorted(dictionary.items(), key=lambda x: x[1],reverse=True)
 	j=4
 	top_news=""
@@ -60,39 +59,24 @@ def analyse_article(filename,headline):
 			break
 		j=j-1
 		
-	#print(top_news)
-	#print(Counter(all_tokens_stemmed))
 	freq=Counter(all_tokens)
-	#print(freq)
-	#print('-----------------------------')
-	#freq1=Counter(all_tokens_stemmed)
-	#print(freq1)
-	#freq2=Counter(all_bigrams)
-	#print(all_bigrams)
-	#print(freq2.most_common(10))
-	f.close()
-	f=open('analysed_'+filename[:-3]+'html','w')
-
-	style="<style type='text/css'>#block{margin: 20px;display: inline-block;	border-style: groove;border-radius: 5px;width: 35em;box-shadow: 10px 10px 5px #888888;} #header{background: lightblue;padding: 15px;font-size:1.15em;font-family: 'roboto';} #article{background: lightyellow;padding: 9px;	font-size:1em;border-style: groove;}</style>"
-
-	f.write(style+
-	"<div id='block'>"+
-	"<div id='header'>"+
-		headline+
-	"</div>"+
-	"<div id='article'>"+
-		 top_news+ 
-	"</div>"+	
-	"</div>")
 	
-	afile.write("<div id='block'>"+
-	"<div id='header'>"+
-		headline+
-	"</div>"+
-	"<div id='article'>"+
-		 top_news+ 
-	"</div>"+	
-	"</div>")
+	f.close()	
+	afile.write('<div class="col m4">'+
+       '<div class="card small hoverable">'+
+          '<div class="card-image waves-effect waves-block waves-light">'+
+            '<img class="activator" src="myimg.png">'+
+          '</div>'+
+          '<div class="card-content">'+
+            '<span class="card-title activator grey-text text-darken-4">'+headline+'</span>'+
+             '</div>'+
+          '<div class="card-reveal">'+
+            '<span class="card-title grey-text text-darken-4">'+headline+'<i class="material-icons right">close</i></span>'+
+            '<p>'+top_news+'</p>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+      '<!-- end of col -->')
 	f.close()
 	afile.close()
 
@@ -101,8 +85,10 @@ def analyse_all():
 	txtCounter-=2
 	h=open('allHeads.txt','r')
 	heads=h.read()
-	afile=open("THEfile.html",'w')
-	afile.write("<style type='text/css'>body{background: #100a0a;} #block{margin: 20px;display: inline-block;	border-style: groove;border-radius: 5px;width: 35em;box-shadow: 10px 7px 9px #204f4a;} #header{background: lightblue;padding: 15px;font-size:1.15em;font-family: 'roboto';} #article{background: lightyellow;padding: 9px;	font-size:1em;border-style: groove;}</style><body>")
+	afile=open("Material.html",'w')
+	afile.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script><!DOCTYPE html><html><head><link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css" rel="stylesheet">  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script> <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head><body>    <nav>        <div class="navbar-wrapper container">          <a href="#" class="brand-logo">InWords</a>          <ul class="right">            <li><a href="#">Home</a></li>            <li><a href="#">About</a></li>            <li><a href="#">Contact Us</a></li>            </ul>            </div>    </nav>'+
+		'<div class="container">'+
+		'<div class="row">')	
 	afile.close()
 	#print(heads)
 	heads=heads.split('\t')

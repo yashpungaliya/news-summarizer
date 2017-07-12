@@ -49,7 +49,6 @@ def get_current_html(url):
 		body=large_descript[0].text.strip(' \t\n\r')
 		body = body.replace(u"\u00A0", "")
 		body = body.replace("\"", " ")
-		body = body.replace("\"", " ")
 		#body = body.replace("'", "")
 		#body = body.replace("-", " ")
 		body = body.replace(":", " ")
@@ -107,7 +106,7 @@ def head_list():
 				print("File:"+k)		
 				newsFile= open("news"+k+".txt","w+")
 				newsFile.write(art)
-				string+=json.loads(i)['head']+'--\n'+json.loads(i)['dateline']+'\t'
+				string+=json.loads(i)['head']+'\t'
 				j=j+1
 		except:
 			print("Found All Links")	
