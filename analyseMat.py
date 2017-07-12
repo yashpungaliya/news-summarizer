@@ -62,7 +62,7 @@ def analyse_article(filename,headline):
 	freq=Counter(all_tokens)
 	
 	f.close()	
-	afile.write('<div class="col m4">'+
+	afile.write('<div class="col s12 m6 l4">'+
        '<div class="card small hoverable">'+
           '<div class="card-image waves-effect waves-block waves-light">'+
             '<img class="activator" src="myimg.png">'+
@@ -86,7 +86,8 @@ def analyse_all():
 	h=open('allHeads.txt','r')
 	heads=h.read()
 	afile=open("Material.html",'w')
-	afile.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script><!DOCTYPE html><html><head><link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css" rel="stylesheet">  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script> <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head><body>    <nav>        <div class="navbar-wrapper container">          <a href="#" class="brand-logo">InWords</a>          <ul class="right">            <li><a href="#">Home</a></li>            <li><a href="#">About</a></li>            <li><a href="#">Contact Us</a></li>            </ul>            </div>    </nav>'+
+	afile.write('<meta name="viewport" content="width=device-width, initial-scale=1.0">'+
+'<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script><!DOCTYPE html><html><head><link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css" rel="stylesheet">  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script> <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></head><body bgcolor=#123422>    <nav style="background-color:#aadd53">        <div class="navbar-wrapper container">          <a href="#" class="brand-logo">Summaries</a>          <ul class="right">            <li><a href="#">Home</a></li>            <li><a href="#">About</a></li>            <li><a href="#">Contact Us</a></li>            </ul>            </div>    </nav>'+
 		'<div class="container">'+
 		'<div class="row">')	
 	afile.close()
